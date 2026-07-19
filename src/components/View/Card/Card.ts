@@ -4,28 +4,24 @@ import { IProduct } from "../../../types";
 import { IEvents } from "../../base/Events";
 
 export class Card<T extends Partial<IProduct>> extends Component<T> {
-  protected titleElement: HTMLElement;
-  protected priceElement: HTMLElement;
+    protected titleElement: HTMLElement;
+    protected priceElement: HTMLElement;
 
-  constructor(
-    container: HTMLElement,
-    protected events: IEvents,
-  ) {
-    super(container);
+    constructor(
+        container: HTMLElement,
+        protected events: IEvents,
+    ) {
+        super(container);
 
-    this.titleElement = ensureElement<HTMLElement>(".card__title", container);
+        this.titleElement = ensureElement<HTMLElement>(".card__title", container);
+        this.priceElement = ensureElement<HTMLElement>(".card__price", container);
+    }
 
-    this.priceElement = ensureElement<HTMLElement>(".card__price", container);
-  }
+    set title(value: string) {
+        this.titleElement.textContent = value;
+    }
 
-  set title(value: string) {
-    this.setText(this.titleElement, value);
-  }
-
-  set price(value: number | null) {
-    this.setText(
-      this.priceElement,
-      value === null ? "Бесценно" : `${value} синапсов`,
-    );
-  }
+    set price(value: number | null) {
+        this.priceElement.textContent = value === null ? "Бесценно" : `${value} синапсов`;
+    }
 }

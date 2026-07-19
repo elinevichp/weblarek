@@ -1,42 +1,17 @@
 export abstract class Component<T> {
-  constructor(protected container: HTMLElement) {}
+    protected constructor(protected readonly container: HTMLElement) {}
 
-  /**
-   * Вернуть корневой элемент компонента
-   */
-  render(data?: Partial<T>): HTMLElement {
-    if (data) {
-      Object.assign(this, data);
+    protected setImage(element: HTMLImageElement, src: string, alt?: string) {
+        if (element) {
+            element.src = src;
+            if (alt) {
+                element.alt = alt;
+            }
+        }
     }
 
-    return this.container;
-  }
-
-  protected setText(element: HTMLElement, value: unknown): void {
-    element.textContent = String(value);
-  }
-
-  protected setImage(
-    element: HTMLImageElement,
-    src: string,
-    alt?: string,
-  ): void {
-    element.src = src;
-
-    if (alt) {
-      element.alt = alt;
+    render(data?: Partial<T>): HTMLElement {
+        Object.assign(this as object, data ?? {});
+        return this.container;
     }
-  }
-
-  protected setDisabled(element: HTMLButtonElement, state: boolean): void {
-    element.disabled = state;
-  }
-
-  protected setHidden(element: HTMLElement): void {
-    element.hidden = true;
-  }
-
-  protected setVisible(element: HTMLElement): void {
-    element.hidden = false;
-  }
 }
