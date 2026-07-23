@@ -37,10 +37,10 @@ export class BasketView extends Component<IBasketView> {
   }
 
   set total(value: number) {
-    this.setText(this.totalElement, `${value} синапсов`);
+    this.totalElement.textContent = `${value} синапсов`;
   }
 
   set buttonDisabled(value: boolean) {
-    this.setDisabled(this.buttonElement, value);
+    this.buttonElement.disabled = value;
   }
 }

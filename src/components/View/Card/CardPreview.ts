@@ -10,7 +10,6 @@ export class CardPreview extends ProductCard<Partial<IProduct>> {
   constructor(
     container: HTMLElement,
     events: IEvents,
-    protected onButtonClick: () => void,
   ) {
     super(container, events);
 
@@ -24,20 +23,18 @@ export class CardPreview extends ProductCard<Partial<IProduct>> {
       container,
     );
 
-    this.buttonElement.addEventListener("click", () => {
-      this.onButtonClick();
-    });
+    this.buttonElement.addEventListener("click", () => this.events.emit("card:click"));
   }
 
   set description(value: string) {
-    this.setText(this.descriptionElement, value);
+    this.descriptionElement.textContent = value;
   }
 
   set buttonText(value: string) {
-    this.setText(this.buttonElement, value);
+    this.buttonElement.textContent = value;
   }
 
   set disabled(value: boolean) {
-    this.setDisabled(this.buttonElement, value);
+    this.buttonElement.disabled = value;
   }
 }
